@@ -83,3 +83,5 @@ vyatta-lldp
 vyatta-zone
 vyatta-config-mgmt
 vyatta-cron
+vyatta-cfg-op-pptp-client
+pptp-linux
