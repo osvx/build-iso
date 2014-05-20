@@ -218,3 +218,9 @@
 [submodule "pkgs/igmpproxy"]
 	path = pkgs/igmpproxy
 	url = https://dev.niistt.ru/git-vyos/igmpproxy.git
+[submodule "pkgs/vyatta-cfg-op-pptp-client"]
+	path = pkgs/vyatta-cfg-op-pptp-client
+	url = https://dev.niistt.ru/git-vyos/vyatta-cfg-op-pptp-client
+[submodule "pkgs/pptp-linux"]
+	path = pkgs/pptp-linux
+	url = https://dev.niistt.ru/git-vyos/pptp-linux.git
