@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# set by file copying
+exit 0
+
+echo I: Rewriting /etc/issue and /etc/issue.net
+cat <<EOF > etc/issue
+Welcome to OS/VX - \n \l
+
+EOF
+cat <<EOF > etc/issue.net
+Welcome to OS/VX
+EOF
+
+cat <<EOF > etc/issue.mgetty
+Welcome to OS/VX
+EOF

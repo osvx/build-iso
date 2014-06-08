@@ -1,17 +1,17 @@
 system {
     login {
-        user vyos {
+        user osvx {
             authentication {
-                encrypted-password "$1$5HsQse2v$VQLh5eeEp4ZzGmCG/PRBA1"
+                encrypted-password "$1$bw5xf7Wn$hESSB/hYFumIkDWJEZo/B0"
             }
             level admin
         }
     }
     package {
         repository community {
-	    distribution "helium"
+	    distribution "projectx"
             components "main"
-            url "http://packages.vyos.net/vyos"
+            url "http://packages.osvx.net/osvx"
         }
     }
     syslog {
@@ -22,16 +22,6 @@ system {
             facility protocols {
                 level debug
             }
-        }
-    }
-    ntp {
-        server "0.pool.ntp.org"
-        server "1.pool.ntp.org"
-        server "2.pool.ntp.org"
-    }
-    console {
-        device ttyS0 {
-            speed 9600
         }
     }
     config-management {

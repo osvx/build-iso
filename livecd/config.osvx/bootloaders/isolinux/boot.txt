@@ -1,0 +1,17 @@
+
+*************************************************************
+*                                                           *
+*         Welcome to OS/VX router operating system!         *
+*                                                           *
+*   OS/VX version: 0.9-devel (projectx)                     *
+*                                                           *
+*   Default login:    osvx                                  *
+*   Default password: osvx                                  *
+*                                                           *
+*   To start installation, please login and use command:    *
+*                                                           *
+*         install system                                    *
+*                                                           *
+*************************************************************
+
+07Press <0fF107>control and F then 1 for help, or ENTER to

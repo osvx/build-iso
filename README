@@ -1,154 +1,22 @@
-VyOS ISO Build Procedures
+OS/VX ISO Build Procedures
 
-    This document describes how to build a VyOS ISO image. The most
-    recent version of this document is the top-level README file from 
-    the "latest" branch of the "build-iso" git source repository.
-
-
-Build Host Setup
-
-    The current VyOS ISO build requires a Debian "squeeze"-based system.
-    As of now, "squeeze" is the Debian "stable" release. Therefore, to
-    install a minimal squeeze system, download a squeeze installer "netinst"
-    or "businesscard" ISO image from the following Debian page:
-
-      http://www.debian.org/releases/squeeze/debian-installer/
-
-    The supported architectures currently include "i386" and "amd64".
-    During the installation, choose "Standard system utilities" when
-    selecting the software to be installed (note that this is the minimal
-    requirements and one can certainly install more packages).
-
-    After the installation and reboot, your "apt" sources.list file should
-    be configured to use the Debian mirror that you selected during the
-    installation. In order to build the VyOS packages and the ISO,
-    install the following packages using "apt-get" or "aptitude".
-
-      git            # Required, for cloning the source
-      autoconf       # Required, for generating build scripts
-      dpkg-dev       # Required, used in build scripts
-      live-helper    # Required, for ISO build
-      syslinux       # Required, for ISO build
-      genisoimage    # Required, for ISO build
-      make           # Required, for ISO build
-      ssh            # Optional, for cloning over SSH
-      sudo           # Optional, ISO build requires root privileges
-
-    Now install the VyOS package repository GPG key.
-
-      wget -O - http://packages.vyos.net/vyos-pubkey.gpg  | sudo apt-key add -
-
-Tools update:
-    You will also need to download and install a newer "squashfs-tools"
-    package from the squeeze-backports repository. VyOS uses extended
-    file attributes, and older (pre 4.2) versions do not handle attributes.
-
-    Debian instructions on how to setup squeeze-backports.
-    Add backports to your sources.list
-    1. Add this line
-       deb http://backports.debian.org/debian-backports squeeze-backports main
-    to your sources.list (or add a new file with the ".list" extension to /etc/apt/sources.list.d/)
-    2. Run apt-get update
-
-    After that do:
-      sudo apt-get -t squeeze-backports install squashfs-tools
-
-Getting "build-iso" Source
-
-    The VyOS ISO builder consists of scripts and config files
-    maintained as a git repository named "build-iso". First, clone
-    the build-iso git repository.
-
-	git clone https://github.com/vyos/build-iso.git
-
-    This will create the source tree in the directory "build-iso".
-    (At this point, you might want to switch to reading
-    ./build-iso/README, which is the most recent version
-    of the file which you are reading now:-)
-
-    Our git repositories have branches, which usually correspond to
-    different releases. To switch to a particular branch (let's call
-    it BRANCH), do the following.
-
-	cd build-iso
-	git checkout --track -b BRANCH origin/BRANCH
-
+    This document describes how to build a OS/VX ISO image.
 
 Build ISO
 
-    To build a VyOS ISO, do the following in the "build-iso" directory
-    (which has been set up as described in the previous section).
+    To build a OS/VX ISO, do the following in the "build-iso" directory.
+    NOTE: do not run configure script as it is not ready!
 
-	export PATH=/sbin:/usr/sbin:$PATH
-	autoreconf -i
-	./configure
         sudo make iso
 
     The end results is the following livecd ISO image.
 
-	livecd/binary.iso
-
-    Note that the above build process uses the pre-built binary packages
-    from the VyOS package repository, which contains the
-    latest development packages built by the maintainers.
+	livecd/osvx-projectx-devel-*.iso
 
     If you want to make modifications to one or more packages, you will
     need to get the source of the submodule(s) that you want to change,
     make the changes, build the submodules, and then build a new ISO to
     include the new packages. This is discussed in the next section.
-
-
-Build Host Setup for Building Submodules
-
-    VyOS code is organized in multiple submodules instead of a huge
-    single repo. For more information about submodules see
-    http://git-scm.com/book/en/Git-Tools-Submodules
-
-    Before you start building submodules, install the following packages:
-        devscripts # Provides debuild
-
-    To fetch submodule source, use:
-        cd build-iso
-        git submodule update --init pkgs/$submoduleName
-
-    e.g.
-        git submodule update --init pkgs/vyatta-cfg-system
-
-    After that you need to switch to the target branch:
-        cd pkgs/$submoduleName
-        git branch $branch --track origin/$branch
-        git checkout $branch
-
-    You can lookup the current development branch at http://vyos.net
-
-    Submodules may have build dependencies not present in the system by default.
-    You can quickly find out what build dependencies are by running the following
-    command inside a submodule:
-        dpkg-checkbuilddeps
-
-    Some submodules require packages not available from Debian Squeeze
-    repositories. Known cases at this point include:
-
-    * vyatta-quagga
-        Requires libsnmp newer than available in Debian Squeeze. To build it,
-        you need to build pkgs/net-snmp submodule and install generated
-        packages first.
-    * libnetfilter-conntrack
-        Requires libmnl, which is not in Debian Squeeze. Build pkgs/libmnl and
-        install generated packages first.
-    * conntrack-tools
-        Requires libnetfilter-conntrack, libnetfilter-cttimeout, libnetfilter-cthelper,
-        libnetfilter-queue. Build and install these first.
-
-    The alternative to building those dependencies from source is to install them from
-    the VyOS repository, http://packages.vyos.net/vyos/ (set distribution to the current
-    development branch).
-
-   [There may be more cases of unusual dependencies. Also, there may be packages with
-    redundant or missing build dependencies, as clean up of the code inherited from
-    Vyatta is still work in progress, so if you spot anything like that, please
-    let maintainers know]
-
 
 Build submodules
 
@@ -179,96 +47,3 @@ Build submodules
 
         make release-vyatta-cfg
 
-    Using submod-mk script
-
-      The submod-mk script in tools/ can also be used to work with submodules.
-      To build binary packages for cloned submodule(s),
-
-        tools/submod-mk { --all | SUBMODULE... }
-
-      To build binary and source packages for submodule(s),
-
-        tools/submod-mk --source { --all | SUBMODULE... }
-
-      To build signed binary and source packages for submodule(s),
-
-        tools/submod-mk --signed-source { --all | SUBMODULE... }
-
-      To clean files generated during submodule build,
-
-        tools/submod-clean SUBMODULE...
-
-      To clean files generated during all submodule builds,
-
-        tools/submod-clean
-
-      To also clean the submodule build stage(s),
-
-        tools/submod-clean -d [ SUBMODULE... ]
-
-      To clean the source tree of submodules to skip subsequent builds,
-
-        tools/submod-clean -g [ SUBMODULE... ]
-
-      This retains the local bare git repository for quicker updates.
-
-Changes
-
-    If you want to share your changes, there are two options:
-
-    1. Email patches
-        Use "git format-patch -${number of commits}" command. It will produce
-        one or more patch files in your repo directory. Email these patches to
-        maintainers@vyos.net or (better) add them to the corresponding bug on
-        http://bugzilla.vyos.net as attachments.
-
-    2. Fork the submodule on github and make pull request.
-
-Updates using git
-
-    Update the super-module.
-
-	git pull
-	git submodule init
-
-    To update all modules, you can use:
-
-	tools/submod-git pull
-
-    Or for the paranoid
-
-	tools/submod-git fetch
-	git whatchanged HEAD..origin/master
-	git merge
-
-    To see which checked-out submodules have upstream modifications,
-
-	git status		# search for changes in pkgs/
-
-    Get the "from" and "to" commit ids (SHAs) with,
-
-	git diff pkgs/SUBMODULE
-
-    This will produce output something like,
-
-	diff --git a/pkgs/vyatta-cfg-quagga b/pkgs/vyatta-cfg-quagga
-	index 78124a9..fca1739 160000
-	--- a/pkgs/vyatta-cfg-quagga
-	+++ b/pkgs/vyatta-cfg-quagga
-	@@ -1 +1 @@
-	-Subproject commit 78124a9754efe0bda1d9c827c593c5e0635fec3c
-	+Subproject commit fca1739f1985c2ba8d6316b1882365f5e26245cd
-
-    To review what changed between these SHAs,
-
-	cd pkgs/SUBMODULE
-	git whatchanged FROM_SHA TO_SHA
-
-    To merge these submodule changes,
-
-	git merge
-	cd ../..
-	git submodule update
-
-    The "git status" for this submodule should now be clean. Iterate
-    through the other updated submodules, then rebuild the ISO.

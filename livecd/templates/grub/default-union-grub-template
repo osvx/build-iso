@@ -1,9 +1,9 @@
-menuentry "VyOS $RVER$ (KVM console)" {
+menuentry "OS/VX $RVER$ (KVM console)" {
         linux /boot/$RVER$/vmlinuz boot=live quiet vyatta-union=/boot/$RVER$ console=ttyS0,9600 console=tty0
         initrd /boot/$RVER$/initrd.img
 }
 
-menuentry "VyOS $RVER$ (Serial console)" {
+menuentry "OS/VX $RVER$ (Serial console)" {
         linux /boot/$RVER$/vmlinuz boot=live quiet vyatta-union=/boot/$RVER$ console=tty0 console=ttyS0,9600
         initrd /boot/$RVER$/initrd.img
 }

@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# enabled globally in /etc/bash.basrh
+exit 0
+
+grep -q '\(^[^#]*\)\(\.\|source\) /etc/bash_completion' root/.bashrc || \
+    cat <<-EOF >> root/.bashrc
+
+	source /etc/bash_completion
+	EOF

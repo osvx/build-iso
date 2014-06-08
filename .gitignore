@@ -16,18 +16,23 @@
 /livecd/.lock
 /livecd/.permissions
 /livecd/.stage
+/livecd/.build/
 /livecd/cache
 /livecd/chroot
 /livecd/config
 /livecd/binary*
+/livecd/live*
 /livecd/iso-label
-/livecd/mk.livecd.conf
+#/livecd/mk.livecd.conf
 /livecd/version
 /livecd/branch
 /livecd/xensource
 /livecd/buildid
 /livecd/builtby
 /livecd/iso-submodules.txt
+/livecd/chroot.headers
+/livecd/chroot.packages.install
+/livecd/chroot.packages.live
 
 /mk.conf
 
@@ -46,5 +51,5 @@
 debian/control
 
 *.iso
-
+*.iso.zsync.xz
 

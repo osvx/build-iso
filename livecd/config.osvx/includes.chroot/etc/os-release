@@ -1,0 +1,9 @@
+NAME="OS/VX"
+VERSION="0.1, projectx"
+ID=projectx
+ID_LIKE=debian
+PRETTY_NAME="OS/VX (projectx)"
+VERSION_ID="0.1"
+HOME_URL="http://www.niistt.ru/"
+SUPPORT_URL="http://www.niistt.ru/"
+BUG_REPORT_URL="http://www.niistt.ru/"

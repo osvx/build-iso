@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# Locale is now set by file copying
+exit 0;
+
+echo I: Set default locale
+cat <<EOF >etc/default/locale
+LANG=en_US.UTF-8
+LC_ALL=C
+EOF
+

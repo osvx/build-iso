@@ -4,6 +4,7 @@
 export MAKEFLAGS
 export NETSNMP_DONT_CHECK_VERSION=1
 
+REPO_PATH := /home/yavv/osvx/apt-repo
 PACKAGE_DEBS := $(subst /debian,,$(wildcard pkgs/*/debian))
 CLEAN_DEBS := $(subst pkgs/,clean-pkgs/,$(PACKAGE_DEBS))
 BUILD_PKGS := $(subst pkgs/,,$(PACKAGE_DEBS))
@@ -26,7 +27,6 @@ cd livecd && $(FAKEROOT) $(FAKECHROOT) ./mk.livecd
 endef
 
 all : package_debuilds
-	$(mk_iso)
 
 .PHONY : iso
 iso :
@@ -71,6 +71,7 @@ clean_debuilds: $(CLEAN_DEBS)
 .PHONY: $(PACKAGE_DEBS)
 $(PACKAGE_DEBS):
 	@case "$@" in pkgs/installer*|pkgs/linux-kernel-di*|"" )  true;; *) echo !!!!!$@!!!!!!!; cd $@; debuild -i -b -uc -us -nc;; esac
+#	@case "$@" in pkgs/installer*|pkgs/linux-kernel-di*|"" )  true;; *) echo !!!!!$@!!!!!!!; cd $@; (debuild -i -b -uc -us -nc && reprepro -b $(REPO_PATH) includedeb projectx $@);; esac
 
 .PHONY: $(CLEAN_DEBS)
 $(CLEAN_DEBS):

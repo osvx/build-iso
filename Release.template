@@ -1,5 +1,5 @@
-Origin: VyOS
-Label: VyOS
+Origin: OS/VX
+Label: OS/VX
 Suite: unstable
 Codename: sid
 Date: WDY MON DD HH:MM:SS TZ  YYYY

@@ -15,7 +15,7 @@ fi
 echo I: cleaning earlier build
 trap "clean_mounts; exit 0" EXIT
 clean_mounts
-rm -rf binary binary.iso chroot config livecd-*.iso .stage
+rm -rf binary binary.iso chroot config .build binary.hybrid.iso.zsync.xz
 # remove cached Packages/Release files from previous run
 # (cache only valid within the same run)
 rm -rf cache/indices_bootstrap
@@ -38,19 +38,26 @@ for p in ../pkgs/*.deb; do
   found=false
   pp=${p%%_*}
   pkg=${pp#../pkgs/}
-  for l in config/chroot_local-packageslists/*.list; do
+  for l in config/package-lists/*.list.chroot; do
     if egrep -q -e "^$pkg$" $l; then
       found=true
       break
     fi
   done
   if eval "$found"; then
-    cp -lf $p config/chroot_local-packages/
+    cp -lf $p config/packages.chroot/
   fi
 done
 
+# Copy kernel images if exists
+cp -lf ../pkgs/linux-image-*.deb config/packages.chroot
+cp -lf ../pkgs/osvx-keyring*.deb config/packages.chroot
+#cp -lf ../pkgs/linux-firmware-* config/packages.chroot
+cp -lf ../pkgs/linux-image-osvx*.deb config/packages.binary
+#cp -lf ../pkgs/linux-firmware-* config/packages.binary
+
 echo I: building bootstrap
-if ! lh bootstrap; then
+if ! lb bootstrap; then
   echo E: bootstrap build failed
   exit 1
 fi
@@ -62,7 +69,7 @@ echo "I: It's not like I'm building this specially for you or anything"
 (rm -f chroot/dev/random && mknod -m 666 chroot/dev/random c 1 9) || true
 
 echo I: building chroot
-if ! lh chroot; then
+if ! lb chroot; then
   echo E: chroot build failed
   exit 1
 fi
@@ -89,9 +96,11 @@ chroot chroot sh -c \
    >> /opt/vyatta/etc/config.boot.default'
 
 rm -rf chroot/root/{.rnd,.gnupg,.aptitude,.debtags}
+rm -f chroot/var/log/* || true
+rm -f chroot/var/log/apt/* || true
 
 ## restore apt/preferences for binary build
-cp -f config/chroot_apt/preferences chroot/etc/apt
+#cp -f config/chroot_apt/preferences chroot/etc/apt
 
 # fix for bug 5333. add kernel-img.conf to be included in image.
 # note: can't add file during local_includes and local_hooks since it will
@@ -109,14 +118,15 @@ if eval "$create_xensourcevm"; then
 fi
 
 echo I: building binary
-if ! lh binary ; then
+if ! lb binary ; then
   echo E: binary build failed
   exit 1
 fi
 
 # new image name (hybrid image)
-mv binary-hybrid.iso binary.iso
-ln -nsf binary.iso livecd-"$BUILDID".iso
+#mv binary.hybrid.iso binary.iso
+mv binary.hybrid.iso osvx-projectx-devel-livecd-"$BUILDID".iso
+mv binary.hybrid.iso.zsync.xz osvx-projectx-devel-livecd-"$BUILDID".iso.zsync.xz
 
 echo I: Done
 

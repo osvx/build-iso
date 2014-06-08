@@ -1,0 +1,19 @@
+0fGETTING HELP07                                                                  09F907
+If you have trouble installing OS/VX, don't despair!
+
+Visit http://www.osvx.net/wiki/community to find links to discussion groups.
+
+For best results when posting your issue, try to be as specific as 
+you can about what version of OS/VX and the exact hardware, including any
+optional hardware, you are trying to use.
+
+Include a specific description of the failure condition or error message.
+
+We are especially interested in hearing about installation problems.
+Generally, installation problems happen to multiple people and you can help us
+solve a problem for others who may follow you.  OS/VX is committed to
+supporting an ever-increasing set of hardware, and while we can't commit to
+supporting everything, we want to understand which hardware is the source of
+problems.
+
+Press F1control and F then 1 for the help index, or ENTER to

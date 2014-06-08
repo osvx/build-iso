@@ -13,10 +13,10 @@ clean_mounts()
 }
 
 # Returns version string used in "Description"
-# e.g. "VyOS 1.0.0 (hydrogen)"
+# e.g. "OS/VX 1.0.0 (projectx-1)"
 get_full_version () {
     local branch=$(git branch | awk '/^\*/ {print $2}')
-    echo "VyOS $1 ($branch)"
+    echo "OS/VX $1 ($branch)"
 }
 
 # Returns numeric version from ./version files
@@ -79,22 +79,23 @@ EOF
     chroot "$savedir"/chroot /opt/vyatta/bin/save-package-report
     mv $etcdir/deb-versions.txt $vf/.
 
-    ( cd "$savedir"/.. ; git submodule status 2>/dev/null ) \
-         > $vf/iso-submodules.txt
-    [ -s $vf/iso-submodules.txt ] || cp "$savedir"/iso-submodules.txt $vf/. 2>/dev/null
+#    ( cd "$savedir"/.. ; git submodule status 2>/dev/null ) \
+#         > $vf/iso-submodules.txt
+#    [ -s $vf/iso-submodules.txt ] || cp "$savedir"/iso-submodules.txt $vf/. 2>/dev/null
+    touch $vf/iso-submodules.txt
 
     echo vyatta-version ${NUMERIC_VERSION} >> $vf/deb-versions.txt
 
-    echo "Version:      VyOS ${NUMERIC_VERSION}" > $vf/version
+    echo "Version:      OS/VX ${NUMERIC_VERSION}" > $vf/version
     echo "Description:  ${FULL_VERSION}" >> $vf/version
-    echo "Copyright:    ${CURYEAR} SO3 Group" >> $vf/version
+    echo "Copyright:    ${CURYEAR} OS/VX development team" >> $vf/version
     ln -nsf version $vf/version-virt
 
     (
         echo "Package: vyatta-version"
         echo "Version: ${NUMERIC_VERSION}"
         echo "Architecture: ${arch}"
-        echo "Maintainer: SO3 Group <maintainers@vyos.net>"
+        echo "Maintainer: OS/VX development team <maintainers@osvx.net>"
         echo "Essential: no"
         echo "Section: base"
         echo "Replaces: vyatta-version, vc-version, vc2-version, devel-version, vyatta-cfg-system"
@@ -113,7 +114,7 @@ EOF
     rm -rf $tmpdir
     cd $savedir
     cp /tmp/$$-deb/$vpkgname chroot/
-    mv /tmp/$$-deb/$vpkgname config/chroot_local-packages/.
+    mv /tmp/$$-deb/$vpkgname config/packages.chroot/.
     # dpkg should be done inside chroot
     chroot chroot dpkg -i /$vpkgname
     rm chroot/$vpkgname
@@ -143,13 +144,13 @@ vyatta-xensource-partition-image ()
   fi
 
   # preallocated image
-  # dd if=/dev/zero of=xensource/vyos-xensource-$NUMERIC_VERSION-$arch.img bs=1024k count=4000
+  # dd if=/dev/zero of=xensource/osvx-xensource-$NUMERIC_VERSION-$arch.img bs=1024k count=4000
   # sparse image
-  dd if=/dev/zero of=xensource/vyos-xensource-$NUMERIC_VERSION-$arch.img bs=1k seek=4096k count=1
+  dd if=/dev/zero of=xensource/osvx-xensource-$NUMERIC_VERSION-$arch.img bs=1k seek=4096k count=1
 
   # allocate loop device for file
   loop=$(losetup -f)
-  losetup $loop xensource/vyos-xensource-$NUMERIC_VERSION-$arch.img || echo E: unable to allocate loop device
+  losetup $loop xensource/osvx-xensource-$NUMERIC_VERSION-$arch.img || echo E: unable to allocate loop device
 
   # create filesystem
   mke2fs -j $loop
@@ -196,14 +197,14 @@ vyatta-xensource-partition-image ()
   rm -f $nimg.gz $nimg.0
 
   # create the default domU configuration file
-  cat <<-EOF > xensource/vyos-xensource-$NUMERIC_VERSION.cfg
-	name='vyos-$NUMERIC_VERSION'
+  cat <<-EOF > xensource/osvx-xensource-$NUMERIC_VERSION.cfg
+	name='osvx-$NUMERIC_VERSION'
 	bootloader='/usr/bin/pygrub'
 	on_reboot='restart'
 	on_shutdown='destroy'
 	on_crash='destroy'
-	image_name='vyos-$NUMERIC_VERSION'
-	disk=['tap:aio:/var/xen/vyos-xensource-$NUMERIC_VERSION-$arch.img,xvda1,w']
+	image_name='osvx-$NUMERIC_VERSION'
+	disk=['tap:aio:/var/xen/osvx-xensource-$NUMERIC_VERSION-$arch.img,xvda1,w']
 	vcpus=1
 	memory=512
 	EOF
@@ -243,7 +244,7 @@ vyatta-xensource-partition-image ()
   clean_up_xensource
 
   echo I: compressing XenSource partition image file
-  gzip xensource/vyos-xensource-$NUMERIC_VERSION-$arch.img
+  gzip xensource/osvx-xensource-$NUMERIC_VERSION-$arch.img
 }
 
 get_chroot_kernel_version ()
@@ -277,25 +278,27 @@ set_up_lh_config ()
   local branch=$VYATTA_BUILD_BRANCH
 
   # get the branch/repo related parameters if any
-  if [ -f config.vyatta/vbuild.conf ]; then
-    source config.vyatta/vbuild.conf
+  if [ -f config.osvx/vbuild.conf ]; then
+    source config.osvx/vbuild.conf
   fi
 
   # Remove trailing /'s from URLs
-  VYOS_DEBIAN_MIRROR=`echo $VYOS_DEBIAN_MIRROR | sed -re 's!(.*[^/])/+$!\1!'`
-  VYOS_DEBIAN_BOOTSTRAP_MIRROR=`echo $VYOS_DEBIAN_BOOTSTRAP_MIRROR | sed -re 's!(.*[^/])/+$!\1!'`
-  VYOS_PACKAGE_MIRROR=`echo $VYOS_PACKAGE_MIRROR | sed -re 's!(.*[^/])/+$!\1!'`
+  OSVX_DEBIAN_MIRROR=`echo $OSVX_DEBIAN_MIRROR | sed -re 's!(.*[^/])/+$!\1!'`
+  OSXV_DEBIAN_BOOTSTRAP_MIRROR=`echo $OSVX_DEBIAN_BOOTSTRAP_MIRROR | sed -re 's!(.*[^/])/+$!\1!'`
+  OSVX_PACKAGE_MIRROR=`echo $OSVX_PACKAGE_MIRROR | sed -re 's!(.*[^/])/+$!\1!'`
 
   # set up the debian repo
-  LB_MIRROR_BINARY=$VYOS_DEBIAN_MIRROR/debian/$branch
-  LB_MIRROR_BOOTSTRAP=$VYOS_DEBIAN_BOOTSTRAP_MIRROR/debian/$branch
+  LB_MIRROR_BINARY=$OSVX_DEBIAN_MIRROR
+  LB_MIRROR_BOOTSTRAP=$OSVX_DEBIAN_BOOTSTRAP_MIRROR
+  LB_MIRROR_CHROOT_SECURITY=$OSVX_DEBIAN_MIRROR
+  LB_MIRROR_BINARY_SECURITY=$OSVX_DEBIAN_MIRROR
 
   echo "I: Using Debian mirror $LB_MIRROR_BINARY"
   echo "I: Using Debian bootstrap mirror $LB_MIRROR_BOOTSTRAP"
 
   export LB_MIRROR_BINARY LB_MIRROR_BOOTSTRAP
 
-  local dev_repo_root=$VYOS_PACKAGE_MIRROR/vyos
+  local dev_repo_root=$OSVX_PACKAGE_MIRROR/osvx
   local repo_dir=unstable
   if ! eval "$VYATTA_DEV_BUILD"; then
     # not dev build => use testing.
@@ -303,77 +306,45 @@ set_up_lh_config ()
     repo_dir=unstable
   fi
 
-  echo "I: Using VyOS package mirror $dev_repo_root"
+  echo "I: Using OS/VX package mirror $dev_repo_root"
 
   # prepare the config files for live helper
-  lh config
+  if [ -n "$APT_PROXY" ]; then
+    APT_PROXY_OPT="--apt-http-proxy \"$APT_PROXY\""
+  fi
+
+  lb config $APT_PROXY_OPT \
+	--archive-areas "main universe multiverse restricted" \
+	--parent-archive-areas "main universe multiverse restricted" \
+	--apt-indices false \
+	--apt-source-archives false \
+	--apt-recommends false \
+	--debug \
+	--initramfs live-boot \
+	--mode debian \
+	--chroot-filesystem squashfs \
+	--syslinux-theme live-build \
+	--initsystem sysvinit \
+	--firmware-chroot false \
+	--firmware-binary false \
+	--linux-flavour "osvx" \
+	--security true \
+	--keyring-packages "debian-archive-keyring osvx-keyring"
   (
-    cd config.vyatta
-    cp -af binary_local-includes chroot_apt chroot_local-hooks \
-      chroot_local-includes chroot_sources chroot_local-packageslists \
-      binary_local-hooks \
+    cd config.osvx
+    cp -af package-lists bootloaders hooks includes.chroot \
       ../config/
-
-    # set up chroot_sources
-    cd ../config/chroot_sources
-    ## "this" branch
-    if [ ! -f vyatta.chroot ]; then
-      echo "deb $dev_repo_root $branch main" > vyatta.chroot
-    fi
-    ## "base" and "extra" branches for overlay
-    for branch in "$VBUILD_BASE_BRANCH" "${VBUILD_EXTRA_BRANCHES[@]}"; do
-      if [ -z "$branch" ] || [ -f "vyatta-$branch.chroot" ]; then
-        continue
-      fi
-      echo "deb $dev_repo_root $branch main" > "vyatta-$branch.chroot"
-      cp vyatta.chroot.gpg "vyatta-$branch.chroot.gpg"
-    done
-
-    # set up apt preferences
-    cd ../chroot_apt
-    for val in "$VYATTA_BUILD_BRANCH" "$VBUILD_BASE_BRANCH" \
-                  "${VBUILD_EXTRA_PKGS[@]}"; do
-      if [ -z "$val" ]; then
-        continue
-      fi
-      local label=EXTRA
-      local prio=999
-      local pkg='*'
-      if [ "$val" == "$VYATTA_BUILD_BRANCH" ]; then
-        # "this" branch
-        label=OVERLAY
-        prio=1000
-        branch=$val
-      elif [ "$val" == "$VBUILD_BASE_BRANCH" ]; then
-        # "base" branch
-        label=BASE
-        prio=998
-        branch=$val
-      else
-        # extra package
-        branch=${val%%_*}
-        pkg=${val##*_}
-      fi
-      cat <<EOF >>preferences
-
-Explanation: BEGIN $label ENTRY
-Package: $pkg
-Pin: release v=$branch
-Pin-Priority: $prio
-Explanation: END $label ENTRY
-EOF
-    done
   )
 
-  if ! eval "$create_xendomzero"; then
-    rm -f config/chroot_local-hooks/*xen*
-  fi
-
-  # set up "vyatta-kernel" packages list according to flavor
-  kplist="config/chroot_local-packageslists/vyatta-kernel.$LB_LINUX_FLAVOURS"
-  if [ -f "$kplist" ]; then
-    # list exists. set it up.
-    mv -f $kplist config/chroot_local-packageslists/vyatta-kernel.list
-  fi
+#  if ! eval "$create_xendomzero"; then
+#    rm -f config/chroot_local-hooks/*xen*
+#  fi
+#
+#  # set up "vyatta-kernel" packages list according to flavor
+#  kplist="config/chroot_local-packageslists/vyatta-kernel.$LB_LINUX_FLAVOURS"
+#  if [ -f "$kplist" ]; then
+#    # list exists. set it up.
+#    mv -f $kplist config/chroot_local-packageslists/vyatta-kernel.list
+#  fi
 }
 

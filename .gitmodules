@@ -1,226 +1,181 @@
 [submodule "pkgs/vyatta-op"]
 	path = pkgs/vyatta-op
-	url = https://dev.niistt.ru/git-vyos/vyatta-op.git
+	url = https://github.com/osvx/vyatta-op.git
 [submodule "pkgs/vyatta-cfg"]
 	path = pkgs/vyatta-cfg
-	url = https://dev.niistt.ru/git-vyos/vyatta-cfg.git
+	url = https://github.com/osvx/vyatta-cfg.git
 [submodule "pkgs/vyatta-op-firewall"]
 	path = pkgs/vyatta-op-firewall
-	url = https://dev.niistt.ru/git-vyos/vyatta-op-firewall.git
+	url = https://github.com/osvx/vyatta-op-firewall.git
 [submodule "pkgs/vyatta-cfg-firewall"]
 	path = pkgs/vyatta-cfg-firewall
-	url = https://dev.niistt.ru/git-vyos/vyatta-cfg-firewall.git
+	url = https://github.com/osvx/vyatta-cfg-firewall.git
 [submodule "pkgs/vyatta-op-quagga"]
 	path = pkgs/vyatta-op-quagga
-	url = https://dev.niistt.ru/git-vyos/vyatta-op-quagga.git
+	url = https://github.com/osvx/vyatta-op-quagga.git
 [submodule "pkgs/vyatta-cfg-quagga"]
 	path = pkgs/vyatta-cfg-quagga
-	url = https://dev.niistt.ru/git-vyos/vyatta-cfg-quagga.git
+	url = https://github.com/osvx/vyatta-cfg-quagga.git
 [submodule "pkgs/vyatta-cfg-system"]
 	path = pkgs/vyatta-cfg-system
-	url = https://dev.niistt.ru/git-vyos/vyatta-cfg-system.git
+	url = https://github.com/osvx/vyatta-cfg-system.git
 [submodule "pkgs/vyatta-config-migrate"]
 	path = pkgs/vyatta-config-migrate
-	url = https://dev.niistt.ru/git-vyos/vyatta-config-migrate.git
+	url = https://github.com/osvx/vyatta-config-migrate.git
 [submodule "pkgs/vyatta-nat"]
 	path = pkgs/vyatta-nat
-	url = https://dev.niistt.ru/git-vyos/vyatta-nat.git
+	url = https://github.com/osvx/vyatta-nat.git
 [submodule "pkgs/vyatta-cluster"]
 	path = pkgs/vyatta-cluster
-	url = https://dev.niistt.ru/git-vyos/vyatta-cluster.git
+	url = https://github.com/osvx/vyatta-cluster.git
 [submodule "pkgs/vyatta-ravpn"]
 	path = pkgs/vyatta-ravpn
-	url = https://dev.niistt.ru/git-vyos/vyatta-ravpn.git
+	url = https://github.com/osvx/vyatta-ravpn.git
 [submodule "pkgs/vyatta-cfg-vpn"]
 	path = pkgs/vyatta-cfg-vpn
-	url = https://dev.niistt.ru/git-vyos/vyatta-cfg-vpn.git
+	url = https://github.com/osvx/vyatta-cfg-vpn.git
 [submodule "pkgs/vyatta-bash"]
 	path = pkgs/vyatta-bash
-	url = https://dev.niistt.ru/git-vyos/vyatta-bash.git
+	url = https://github.com/osvx/vyatta-bash.git
 [submodule "pkgs/vyatta-op-vpn"]
 	path = pkgs/vyatta-op-vpn
-	url = https://dev.niistt.ru/git-vyos/vyatta-op-vpn.git
+	url = https://github.com/osvx/vyatta-op-vpn.git
 [submodule "pkgs/vyatta-op-dhcp-server"]
 	path = pkgs/vyatta-op-dhcp-server
-	url = https://dev.niistt.ru/git-vyos/vyatta-op-dhcp-server.git
+	url = https://github.com/osvx/vyatta-op-dhcp-server.git
 [submodule "pkgs/vyatta-cfg-dhcp-server"]
 	path = pkgs/vyatta-cfg-dhcp-server
-	url = https://dev.niistt.ru/git-vyos/vyatta-cfg-dhcp-server.git
+	url = https://github.com/osvx/vyatta-cfg-dhcp-server.git
 [submodule "pkgs/vyatta-dhcp3-client"]
 	path = pkgs/vyatta-dhcp3-client
-	url = https://dev.niistt.ru/git-vyos/vyatta-dhcp3.git
+	url = https://github.com/osvx/vyatta-dhcp3.git
 [submodule "pkgs/vyatta-cfg-dhcp-relay"]
 	path = pkgs/vyatta-cfg-dhcp-relay
-	url = https://dev.niistt.ru/git-vyos/vyatta-cfg-dhcp-relay.git
+	url = https://github.com/osvx/vyatta-cfg-dhcp-relay.git
 [submodule "pkgs/ppp"]
 	path = pkgs/ppp
-	url = https://dev.niistt.ru/git-vyos/ppp.git
+	url = https://github.com/osvx/ppp.git
 [submodule "pkgs/vyatta-cfg-op-pppoe"]
 	path = pkgs/vyatta-cfg-op-pppoe
-	url = https://dev.niistt.ru/git-vyos/vyatta-cfg-op-pppoe.git
-[submodule "pkgs/iproute"]
-	path = pkgs/iproute
-	url = https://dev.niistt.ru/git-vyos/vyatta-iproute.git
+	url = https://github.com/osvx/vyatta-cfg-op-pppoe.git
 [submodule "pkgs/vyatta-cfg-qos"]
 	path = pkgs/vyatta-cfg-qos
-	url = https://dev.niistt.ru/git-vyos/vyatta-cfg-qos.git
+	url = https://github.com/osvx/vyatta-cfg-qos.git
 [submodule "pkgs/vyatta-op-qos"]
 	path = pkgs/vyatta-op-qos
-	url = https://dev.niistt.ru/git-vyos/vyatta-op-qos.git
+	url = https://github.com/osvx/vyatta-op-qos.git
 [submodule "pkgs/vyatta-wanloadbalance"]
 	path = pkgs/vyatta-wanloadbalance
-	url = https://dev.niistt.ru/git-vyos/vyatta-wanloadbalance.git
+	url = https://github.com/osvx/vyatta-wanloadbalance.git
 [submodule "pkgs/vyatta-base"]
 	path = pkgs/vyatta-base
-	url = https://dev.niistt.ru/git-vyos/vyatta-base.git
+	url = https://github.com/osvx/vyatta-base.git
 [submodule "pkgs/vyatta-keepalived"]
 	path = pkgs/vyatta-keepalived
-	url = https://dev.niistt.ru/git-vyos/vyatta-keepalived.git
+	url = https://github.com/osvx/vyatta-keepalived.git
 [submodule "pkgs/vyatta-busybox"]
 	path = pkgs/vyatta-busybox
-	url = https://dev.niistt.ru/git-vyos/vyatta-busybox.git
+	url = https://github.com/osvx/vyatta-busybox.git
 [submodule "pkgs/net-snmp"]
 	path = pkgs/net-snmp
-	url = https://dev.niistt.ru/git-vyos/net-snmp.git
+	url = https://github.com/osvx/net-snmp.git
 [submodule "pkgs/vyatta-webgui"]
 	path = pkgs/vyatta-webgui
-	url = https://dev.niistt.ru/git-vyos/vyatta-webgui.git
+	url = https://github.com/osvx/vyatta-webgui.git
 [submodule "pkgs/vyatta-openvpn"]
 	path = pkgs/vyatta-openvpn
-	url = https://dev.niistt.ru/git-vyos/vyatta-openvpn.git
+	url = https://github.com/osvx/vyatta-openvpn.git
 [submodule "pkgs/vyatta-quagga"]
 	path = pkgs/vyatta-quagga
-	url = https://dev.niistt.ru/git-vyos/vyatta-quagga.git
-[submodule "pkgs/vyatta-grub"]
-	path = pkgs/vyatta-grub
-	url = https://dev.niistt.ru/git-vyos/vyatta-grub.git
+	url = https://github.com/osvx/vyatta-quagga.git
 [submodule "pkgs/linux-image"]
 	path = pkgs/linux-image
-	url = https://dev.niistt.ru/git-vyos/linux-vyatta.git
-[submodule "pkgs/vyatta-webproxy"]
-	path = pkgs/vyatta-webproxy
-	url = https://dev.niistt.ru/git-vyos/vyatta-webproxy.git
-[submodule "pkgs/iptables"]
-	path = pkgs/iptables
-	url = https://dev.niistt.ru/git-vyos/iptables.git
-[submodule "pkgs/live-initramfs"]
-	path = pkgs/live-initramfs
-	url = https://dev.niistt.ru/git-vyos/live-initramfs.git
+	url = https://github.com/osvx/linux-vyatta.git
 [submodule "pkgs/vyatta-wirelessmodem"]
 	path = pkgs/vyatta-wirelessmodem
-	url = https://dev.niistt.ru/git-vyos/vyatta-wirelessmodem.git
-[submodule "pkgs/open-vm-tools"]
-	path = pkgs/open-vm-tools
-	url = https://dev.niistt.ru/git-vyos/open-vm-tools.git
+	url = https://github.com/osvx/vyatta-wirelessmodem.git
 [submodule "pkgs/initramfs-tools"]
 	path = pkgs/initramfs-tools
-	url = https://dev.niistt.ru/git-vyos/initramfs-tools.git
+	url = https://github.com/osvx/initramfs-tools.git
 [submodule "pkgs/netplug"]
 	path = pkgs/netplug
-	url = https://dev.niistt.ru/git-vyos/netplug.git
+	url = https://github.com/osvx/netplug.git
 [submodule "pkgs/ntp"]
 	path = pkgs/ntp
-	url = https://dev.niistt.ru/git-vyos/ntp.git
-[submodule "pkgs/ipset"]
-	path = pkgs/ipset
-	url = https://dev.niistt.ru/git-vyos/ipset.git
+	url = https://github.com/osvx/ntp.git
 [submodule "pkgs/vyatta-ipv6-rtradv"]
 	path = pkgs/vyatta-ipv6-rtradv
-	url = https://dev.niistt.ru/git-vyos/vyatta-ipv6-rtradv.git
+	url = https://github.com/osvx/vyatta-ipv6-rtradv.git
 [submodule "pkgs/vyatta-netflow"]
 	path = pkgs/vyatta-netflow
-	url = https://dev.niistt.ru/git-vyos/vyatta-netflow.git
+	url = https://github.com/osvx/vyatta-netflow.git
 [submodule "pkgs/pmacct"]
 	path = pkgs/pmacct
-	url = https://dev.niistt.ru/git-vyos/pmacct.git
+	url = https://github.com/osvx/pmacct.git
 [submodule "pkgs/vyatta-wireless"]
 	path = pkgs/vyatta-wireless
-	url = https://dev.niistt.ru/git-vyos/vyatta-wireless.git
-[submodule "pkgs/squidguard"]
-	path = pkgs/squidguard
-	url = https://dev.niistt.ru/git-vyos/squidguard.git
-[submodule "pkgs/vyatta-strongswan"]
-	path = pkgs/vyatta-strongswan
-	url = https://dev.niistt.ru/git-vyos/vyatta-strongswan.git
+	url = https://github.com/osvx/vyatta-wireless.git
 [submodule "pkgs/vyatta-biosdevname"]
 	path = pkgs/vyatta-biosdevname
-	url = https://dev.niistt.ru/git-vyos/vyatta-biosdevname.git
+	url = https://github.com/osvx/vyatta-biosdevname.git
 [submodule "pkgs/linux-firmware"]
 	path = pkgs/linux-firmware
-	url = https://dev.niistt.ru/git-vyos/linux-firmware.git
+	url = https://github.com/osvx/linux-firmware.git
 [submodule "pkgs/vyatta-lldp"]
 	path = pkgs/vyatta-lldp
-	url = https://dev.niistt.ru/git-vyos/vyatta-lldp.git
+	url = https://github.com/osvx/vyatta-lldp.git
 [submodule "pkgs/lldpd"]
 	path = pkgs/lldpd
-	url = https://dev.niistt.ru/git-vyos/lldpd.git
-[submodule "pkgs/libcap"]
-	path = pkgs/libcap
-	url = https://dev.niistt.ru/git-vyos/libcap.git
+	url = https://github.com/osvx/lldpd.git
 [submodule "pkgs/vyatta-conntrack-sync"]
 	path = pkgs/vyatta-conntrack-sync
-	url = https://dev.niistt.ru/git-vyos/vyatta-conntrack-sync.git
-[submodule "pkgs/squashfs"]
-	path = pkgs/squashfs
-	url = https://dev.niistt.ru/git-vyos/squashfs.git
+	url = https://github.com/osvx/vyatta-conntrack-sync.git
 [submodule "pkgs/conntrack-tools"]
 	path = pkgs/conntrack-tools
-	url = https://dev.niistt.ru/git-vyos/conntrack-tools.git
+	url = https://github.com/osvx/conntrack-tools.git
 [submodule "pkgs/vyatta-zone"]
 	path = pkgs/vyatta-zone
-	url = https://dev.niistt.ru/git-vyos/vyatta-zone.git
+	url = https://github.com/osvx/vyatta-zone.git
 [submodule "pkgs/vyatta-config-mgmt"]
 	path = pkgs/vyatta-config-mgmt
-	url = https://dev.niistt.ru/git-vyos/vyatta-config-mgmt.git
-[submodule "pkgs/userspace-rcu"]
-	path = pkgs/userspace-rcu
-	url = https://dev.niistt.ru/git-vyos/userspace-rcu.git
+	url = https://github.com/osvx/vyatta-config-mgmt.git
 [submodule "pkgs/vyatta-conntrack"]
 	path = pkgs/vyatta-conntrack
-	url = https://dev.niistt.ru/git-vyos/vyatta-conntrack.git
-[submodule "pkgs/libnetfilter-conntrack"]
-	path = pkgs/libnetfilter-conntrack
-	url = https://dev.niistt.ru/git-vyos/libnetfilter-conntrack.git
-[submodule "pkgs/libnetfilter-cttimeout"]
-	path = pkgs/libnetfilter-cttimeout
-	url = https://dev.niistt.ru/git-vyos/libnetfilter-cttimeout.git
+	url = https://github.com/osvx/vyatta-conntrack.git
 [submodule "pkgs/vyatta-vrrp"]
 	path = pkgs/vyatta-vrrp
-	url = https://dev.niistt.ru/git-vyos/vyatta-vrrp.git
-[submodule "pkgs/libmnl"]
-	path = pkgs/libmnl
-	url = https://dev.niistt.ru/git-vyos/libmnl.git
-[submodule "pkgs/libnetfilter-queue"]
-	path = pkgs/libnetfilter-queue
-	url = https://dev.niistt.ru/git-vyos/libnetfilter-queue.git
-[submodule "pkgs/libnetfilter-cthelper"]
-	path = pkgs/libnetfilter-cthelper
-	url = https://dev.niistt.ru/git-vyos/libnetfilter-cthelper.git
+	url = https://github.com/osvx/vyatta-vrrp.git
 [submodule "pkgs/vyatta-util"]
 	path = pkgs/vyatta-util
-	url = https://dev.niistt.ru/git-vyos/vyatta-util.git
-[submodule "pkgs/libczmq"]
-	path = pkgs/libczmq
-	url = https://dev.niistt.ru/git-vyos/libczmq.git
-[submodule "pkgs/libzmq-constants-perl"]
-	path = pkgs/libzmq-constants-perl
-	url = https://dev.niistt.ru/git-vyos/libzmq-constants-perl.git
-[submodule "pkgs/libzmq-libzmq2-perl"]
-	path = pkgs/libzmq-libzmq2-perl
-	url = https://dev.niistt.ru/git-vyos/libzmq-libzmq2-perl.git
-
+	url = https://github.com/osvx/vyatta-util.git
 [submodule "pkgs/vyatta-cron"]
 	path = pkgs/vyatta-cron
-	url = https://dev.niistt.ru/git-vyos/vyatta-cron.git
+	url = https://github.com/osvx/vyatta-cron.git
 [submodule "pkgs/ubnt-igmpproxy"]
 	path = pkgs/ubnt-igmpproxy
-	url = https://dev.niistt.ru/git-vyos/vyos-igmpproxy.git
+	url = https://github.com/osvx/vyos-igmpproxy.git
 [submodule "pkgs/igmpproxy"]
 	path = pkgs/igmpproxy
-	url = https://dev.niistt.ru/git-vyos/igmpproxy.git
+	url = https://github.com/osvx/igmpproxy.git
 [submodule "pkgs/vyatta-cfg-op-pptp-client"]
 	path = pkgs/vyatta-cfg-op-pptp-client
-	url = https://dev.niistt.ru/git-vyos/vyatta-cfg-op-pptp-client
+	url = https://github.com/osvx/vyatta-cfg-op-pptp-client
 [submodule "pkgs/pptp-linux"]
 	path = pkgs/pptp-linux
-	url = https://dev.niistt.ru/git-vyos/pptp-linux.git
+	url = https://github.com/osvx/pptp-linux.git
+
+[submodule "pkgs/linux-meta-osvx"]
+	path = pkgs/linux-meta-osvx
+	url = https://github.com/osvx/linux-meta-osvx.git
+[submodule "pkgs/osvx-opennhrp"]
+	path = pkgs/osvx-opennhrp
+	url = https://github.com/osvx/osvx-opennhrp.git
+[submodule "pkgs/osvx-keyring"]
+	path = pkgs/osvx-keyring
+	url = https://github.com/osvx/osvx-keyring.git
+[submodule "pkgs/dahdi-niistt"]
+	path = pkgs/dahdi-niistt
+	url = https://github.com/osvx/dahdi-niistt.git
+[submodule "pkgs/dahdi-tools"]
+	path = pkgs/dahdi-tools
+	url = https://github.com/osvx/dahdi-tools.git
